@@ -1,0 +1,9 @@
+{
+  "name": "date-utils",
+  "version": "1.0.0",
+  "description": "A collection of date utilities shared across Homebound projects",
+  "main": "dist/index.js",
+  "repository": "https://github.com/homebound-team/date-utils",
+  "author": "Khalid Williams <khalidwill27@gmail.com>",
+  "license": "MIT"
+}
