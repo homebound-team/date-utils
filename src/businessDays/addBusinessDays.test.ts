@@ -57,7 +57,7 @@ describe("addBusinessDays", () => {
 
     it("handles a mix of true and false exceptions", () => {
       const result = addBusinessDays(new Date(2022, 0 /* Jan */, 7), 13, {
-        businessDays: [1, 2, 3, 4, 5, 6], //M-Sat
+        businessDays: [1, 2, 3, 4, 5, 6], // M-Sat
         exceptions: {
           "01/08/22": false, // Sat
           "01/09/22": true, // Sun
@@ -91,7 +91,7 @@ describe("addBusinessDays", () => {
 
     it("handles true Sunday exceptions", () => {
       const result = addBusinessDays(new Date(2022, 0 /* Jan */, 5), 5, {
-        businessDays: [1, 2, 3, 4, 5, 6], //M-Sat
+        businessDays: [1, 2, 3, 4, 5, 6], // M-Sat
         exceptions: { "01/09/22": true },
       });
 
@@ -100,7 +100,7 @@ describe("addBusinessDays", () => {
 
     it("ends on a true exception", () => {
       const result = addBusinessDays(new Date(2022, 0 /* Jan */, 5), 4, {
-        businessDays: [1, 2, 3, 4, 5, 6], //M-Sat
+        businessDays: [1, 2, 3, 4, 5, 6], // M-Sat
         exceptions: { "01/09/22": true },
       });
 
@@ -109,7 +109,7 @@ describe("addBusinessDays", () => {
 
     it("should move to following Monday when ending on a false exception", () => {
       const result = addBusinessDays(new Date(2022, 0 /* Jan */, 7), 5, {
-        businessDays: [1, 2, 3, 4, 5], //M-F
+        businessDays: [1, 2, 3, 4, 5], // M-F
         exceptions: { "01/14/22": false },
       });
 
@@ -118,7 +118,7 @@ describe("addBusinessDays", () => {
 
     it("starts on a non-working Saturday and ends on a false exception, should move to following Monday", () => {
       const result = addBusinessDays(new Date(2022, 0 /* Jan */, 8), 5, {
-        businessDays: [1, 2, 3, 4, 5], //M-F
+        businessDays: [1, 2, 3, 4, 5], // M-F
         exceptions: { "01/14/22": false },
       });
 
@@ -127,7 +127,7 @@ describe("addBusinessDays", () => {
 
     it("starts on a false exception", () => {
       const result = addBusinessDays(new Date(2022, 0 /* Jan */, 7), 5, {
-        businessDays: [1, 2, 3, 4, 5], //M-F
+        businessDays: [1, 2, 3, 4, 5], // M-F
         exceptions: { "01/07/22": false },
       });
 
@@ -136,7 +136,7 @@ describe("addBusinessDays", () => {
 
     it("starts on a true exception", () => {
       const result = addBusinessDays(new Date(2022, 0 /* Jan */, 8), 5, {
-        businessDays: [1, 2, 3, 4, 5], //M-F
+        businessDays: [1, 2, 3, 4, 5], // M-F
         exceptions: { "01/08/22": true },
       });
 
@@ -145,7 +145,7 @@ describe("addBusinessDays", () => {
 
     it("starts and ends on false exceptions, should move to the following working day", () => {
       const result = addBusinessDays(new Date(2022, 0 /* Jan */, 8), 6, {
-        businessDays: [1, 2, 3, 4, 5, 6], //M-Sat
+        businessDays: [1, 2, 3, 4, 5, 6], // M-Sat
         exceptions: { "01/08/22": false, "01/15/22": false },
       });
 
@@ -154,7 +154,7 @@ describe("addBusinessDays", () => {
 
     it("starts and ends on true exceptions", () => {
       const result = addBusinessDays(new Date(2022, 0 /* Jan */, 8), 6, {
-        businessDays: [1, 2, 3, 4, 5], //M-F
+        businessDays: [1, 2, 3, 4, 5], // M-F
         exceptions: { "01/08/22": true, "01/15/22": true },
       });
 
@@ -163,7 +163,7 @@ describe("addBusinessDays", () => {
 
     it("handles a large number of working Saturday exceptions, including some out of range", () => {
       const result = addBusinessDays(new Date(2022, 0 /* Jan */, 3), 36, {
-        businessDays: [1, 2, 3, 4, 5], //M-F
+        businessDays: [1, 2, 3, 4, 5], // M-F
         exceptions: {
           "01/08/22": true,
           "01/15/22": true,
@@ -180,7 +180,7 @@ describe("addBusinessDays", () => {
 
     it("handles a large number of working Saturday exceptions when Sundays are working days", () => {
       const result = addBusinessDays(new Date(2022, 0 /* Jan */, 3), 40, {
-        businessDays: [0, 1, 2, 3, 4, 5], //Sun-F
+        businessDays: [0, 1, 2, 3, 4, 5], // Sun-F
         exceptions: {
           "01/08/22": true,
           "01/15/22": true,
@@ -197,7 +197,7 @@ describe("addBusinessDays", () => {
 
     it("handles a large number of excluded Saturday exceptions, including some out of range", () => {
       const result = addBusinessDays(new Date(2022, 0 /* Jan */, 3), 36, {
-        businessDays: [1, 2, 3, 4, 5, 6], //M-Sat
+        businessDays: [1, 2, 3, 4, 5, 6], // M-Sat
         exceptions: {
           "01/08/22": false,
           "01/15/22": false,

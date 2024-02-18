@@ -68,7 +68,7 @@ export function addBusinessDays(
     return false;
   };
 
-  let newDate = new Date(initialDate);
+  const newDate = new Date(initialDate);
   const sign = amount < 0 ? -1 : 1;
 
   // start on initial day and continue until we have gone through all the days
