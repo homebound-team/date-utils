@@ -1,4 +1,4 @@
-import addBusinessDays from "./addBusinessDays"
+import { addBusinessDays } from "./addBusinessDays"
 
 describe("addBusinessDays", () => {
   describe('can add Saturdays and/or Sundays to working days with the businessDays option', () => {
