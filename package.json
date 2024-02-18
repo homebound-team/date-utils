@@ -6,6 +6,13 @@
   "repository": "https://github.com/homebound-team/date-utils",
   "author": "Khalid Williams <khalidwill27@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest",
+    "format": "prettier --write ./src",
+    "lint": "prettier --check ./src",
+    "prepublishOnly": "yarn build"
+  },
   "devDependencies": {
     "@tsconfig/recommended": "^1.0.3",
     "@types/jest": "^29.5.12",

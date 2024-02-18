@@ -1,4 +1,4 @@
-import { format, toDate } from "date-fns"
+import { format, toDate } from "date-fns";
 
 /**
  * @name addBusinessDays
@@ -25,73 +25,71 @@ export function addBusinessDays(
   dirtyDate: Date | number,
   dirtyAmount: number,
   dirtyOptions?: {
-    businessDays?: number[]
-    exceptions?: Record<string, boolean>
-  }
+    businessDays?: number[];
+    exceptions?: Record<string, boolean>;
+  },
 ): Date {
-  const options = dirtyOptions || {}
-  const exceptions = options.exceptions || {}
-  const businessDays = options.businessDays || [1, 2, 3, 4, 5]
+  const options = dirtyOptions || {};
+  const exceptions = options.exceptions || {};
+  const businessDays = options.businessDays || [1, 2, 3, 4, 5];
 
   // Throw a RangeError if businessDays includes a number greater than 6
   if (businessDays?.filter((number) => number > 6).length > 0) {
-    throw new RangeError('business days must be between 0 and 6')
+    throw new RangeError("business days must be between 0 and 6");
   }
 
-  const initialDate = toDate(dirtyDate)
+  const initialDate = toDate(dirtyDate);
 
-  const amount =
-    dirtyAmount > 0 ? Math.floor(dirtyAmount) : Math.ceil(dirtyAmount)
+  const amount = dirtyAmount > 0 ? Math.floor(dirtyAmount) : Math.ceil(dirtyAmount);
 
-  if (isNaN(amount)) return new Date(NaN)
+  if (isNaN(amount)) return new Date(NaN);
 
-  if (initialDate.toString() === 'Invalid Date') {
-    return initialDate
+  if (initialDate.toString() === "Invalid Date") {
+    return initialDate;
   }
 
   // returns a boolean if the date has an exception
   // true means the date is a working day
   // false means the date is not a working day
   const findException = (date: Date): boolean | undefined => {
-    return exceptions[format(date, 'MM/dd/yy')]
-  }
+    return exceptions[format(date, "MM/dd/yy")];
+  };
 
   // returns true if the date is a business day (doesn't account for exceptions)
-  const isBusinessDay = (date: Date): boolean =>
-    businessDays.includes(date.getDay())
+  const isBusinessDay = (date: Date): boolean => businessDays.includes(date.getDay());
 
   // returns true if the date is a working day (accounts for exceptions)
   const isWorkingDay = (date: Date) => {
-    const isDateIncluded = options.exceptions ? findException(date) : undefined
-    if (isDateIncluded === false) return false
+    const isDateIncluded = options.exceptions ? findException(date) : undefined;
+    if (isDateIncluded === false) return false;
     if (isDateIncluded === true || isBusinessDay(date)) {
-      return true
+      return true;
     }
-    return false
-  }
+    return false;
+  };
 
-  let newDate = new Date(initialDate)
-  const sign = amount < 0 ? -1 : 1
+  let newDate = new Date(initialDate);
+  const sign = amount < 0 ? -1 : 1;
 
   // start on initial day and continue until we have gone through all the days
-  let dayCounter = Math.abs(amount)
+  let dayCounter = Math.abs(amount);
   while (dayCounter > 0) {
-    newDate.setDate(newDate.getDate() + sign)
-    if (isWorkingDay(newDate)) dayCounter -= 1
+    newDate.setDate(newDate.getDate() + sign);
+    if (isWorkingDay(newDate)) dayCounter -= 1;
   }
 
   // If we land on a non-working date, we add/subtract days accordingly to land on the next business day
   const reduceIfNonWorkingDay = (date: Date) => {
     if (!isWorkingDay(date) && amount !== 0) {
-      date.setDate(date.getDate() + sign)
-      reduceIfNonWorkingDay(date)
+      date.setDate(date.getDate() + sign);
+      reduceIfNonWorkingDay(date);
     }
-  }
+  };
 
-  reduceIfNonWorkingDay(newDate)
+  reduceIfNonWorkingDay(newDate);
 
   // Restore hours to avoid DST lag
-  newDate.setHours(initialDate.getHours())
+  newDate.setHours(initialDate.getHours());
 
-  return newDate
+  return newDate;
 }
