@@ -8,4 +8,5 @@
   "paths": {
     "src/*": ["./src/*"]
   },
+  "baseUrl": "."
 }
